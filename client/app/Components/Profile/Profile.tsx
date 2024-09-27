@@ -25,12 +25,38 @@ const Profile = () => {
                 </div>
             </div>
 
+
             <div className='mt-6 flex flex-col gap-8'>
-                <p>Total Tasks:</p>
-                <p className='pl-4 relative flex gap-2'>
-                    <span className='absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-purple-500 rounded-[5px]'></span>
-                    <span className='font-medium text-4xl text-[#333]'>10</span>
-                </p>
+                <div className='grid grid-cols-2 gap-4'>
+                    <div className='text-gray-400'>
+                        <p>Total Tasks:</p>
+                        <p className='pl-4 relative flex gap-2'>
+                            <span className='absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-purple-500 rounded-[5px]'></span>
+                            <span className='font-medium text-4xl text-[#333]'>10</span>
+                        </p>
+                    </div>
+                    <div className='text-gray-400'>
+                        <p>In Progress:</p>
+                        <p className='pl-4 relative flex gap-2'>
+                            <span className='absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-yellow-500 rounded-[5px]'></span>
+                            <span className='font-medium text-4xl text-[#333]'>10</span>
+                        </p>
+                    </div>
+                    <div className='text-gray-400'>
+                        <p>Open Tasks:</p>
+                        <p className='pl-4 relative flex gap-2'>
+                            <span className='absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-red-500 rounded-[5px]'></span>
+                            <span className='font-medium text-4xl text-[#333]'>1</span>
+                        </p>
+                    </div>
+                    <div className='text-gray-400'>
+                        <p>Completed:</p>
+                        <p className='pl-4 relative flex gap-2'>
+                            <span className='absolute h-[70%] w-[0.2rem] left-[1px] top-1/2 translate-y-[-50%] bg-green-500 rounded-[5px]'></span>
+                            <span className='font-medium text-4xl text-[#333]'>100</span>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     )
