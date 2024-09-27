@@ -9,7 +9,7 @@ const Sidebar = () => {
       <div className='mt-4 mx-6'>
         <RadioChart />
       </div>
-      <button className='mt-auto m-6 py-4 px-8 mx-6 bg-[#EB4E31] text-white rounded-[20px] hover:bg-[#3aafae] transition duration-300 ease-in-out'>
+      <button className='mt-auto mb-6 py-4 px-8 mx-6 bg-[#EB4E31] text-white rounded-[20px] hover:bg-[#3aafae] transition duration-300 ease-in-out'>
         Sign out
       </button>
     </div>

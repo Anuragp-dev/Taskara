@@ -109,3 +109,8 @@ form > img {
     @apply bg-background text-foreground;
  }
 }
+
+.main-layout::webkit-scrollbar {
+
+  width: 0;
+}
