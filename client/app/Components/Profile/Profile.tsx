@@ -58,6 +58,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+            <h3 className='mt-8 font-medium'>Activity</h3>
         </div>
     )
 }
