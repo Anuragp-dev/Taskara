@@ -18,7 +18,10 @@ const Filters = () => {
                     width: "calc(100%/4 - 10px)",
                     height: "calc(100% - 10px)",
                     top: "50%",
-                    transform: "translate(0,-50%)"
+                    transform: `translate(calc(${activeIndex * 100}% + ${
+                        activeIndex * 10
+                        }px), -50%)`,
+                    transition: "transform 300ms cubic-bezier(95, .03, 1, 1)"
                 }}></span>
             {priorities.map((priority, index) => (
                 <button

@@ -15,6 +15,9 @@ export default function Home() {
         </h1>
         <Filters/>
       </div>
+      <div className="pb-[20rem] mt-6 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-[1.5rem]">
+
+      </div>
     </main>
   );
 }
