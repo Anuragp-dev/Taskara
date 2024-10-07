@@ -13,6 +13,8 @@ export const TasksProvider = ({ children }) => {
     const [task, setTask] = React.useState([]);
     const [priority, setPriority] = React.useState("All");
 
+    // const data ='poda cherukka'
+
     // user id 
     const userId = useUserContext()?.user?._id;
 
@@ -21,8 +23,9 @@ export const TasksProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.get(`${serverUrl}/task/get-tasks`);
-            setTask(response.data);
-        } catch (error) {
+            // console.log("response,", response)
+            setTasks(response.data.tasks);
+        } catch (error) { 
             console.log(error);
         }
 
@@ -93,11 +96,13 @@ export const TasksProvider = ({ children }) => {
 
     useEffect(() => {
         getTasks();
+        console.log("useEffect called")
     }, [userId]);
 
     return (
         <TaskContext.Provider value={{
             tasks,
+            data,
             loading,
             task,
             getTasks,
