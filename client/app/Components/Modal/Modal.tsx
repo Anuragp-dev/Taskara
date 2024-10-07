@@ -8,8 +8,8 @@ const Modal = () => {
     const { task, handleInput } = useTasks();
 
     return (
-        <div className='fixed flex justify-center items-center left-0 top-0 z-50 h-full w-full bg-[#333]/30 overflow-hidden'>
-            <form action="" className='py-5 px-6 max-w-[520px] w-full flex flex-col gap-3 bg-white absolute transform-translate-x-1/2 -translate-y-1/2 rounded-lg shadow-md '>
+        <div className='fixed flex justify-center items-center left-0 top-0 bottom-0 right-0 z-50 h-full w-full bg-[#333]/30 overflow-hidden'>
+            <form action="" className='py-5 px-6 max-w-[520px] w-full flex flex-col gap-3 bg-white absolute rounded-lg shadow-md '>
                 <div className='flex flex-col gap-1'>
                     <label htmlFor="">Title</label>
                     <input
@@ -45,6 +45,37 @@ const Modal = () => {
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
                     </select>
+                </div>
+                <div className='flex flex-col gap-1'>
+                    <label htmlFor="">Title</label>
+                    <input
+                        className='bg-[#F9F9F9] p-2 rounded-md border'
+                        type="date"
+                        name='dueDate'
+                        value={task?.dueDate}
+                        onChange={(e) => handleInput("dueDate")(e)}
+                    />
+                </div>
+                <div className='flex flex-col gap-1'>
+                    <label htmlFor="completed">Task Completed</label>
+                    <div className='flex items-center justify-between bg-[#F9F9F9] p-2 rounded-md border'>
+                        <label htmlFor="completed"> Completed</label>
+                        <div>
+
+                            <select
+                                className="bg-[#F9F9F9] p-2 rounded-md border cursor-pointer"
+                                name='completed'
+                                value={task?.completed ? "true" : "false"}
+                                onChange={(e) => handleInput("completed")(e)}
+                            >
+                                <option value="true">No</option>
+                                <option value="false">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div className='mt-8'>
+                    <button type='submit'>Create Task</button>
                 </div>
             </form>
         </div>
