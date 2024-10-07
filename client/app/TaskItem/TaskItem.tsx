@@ -37,10 +37,13 @@ const TaskItem = ({ task }: TaskItemProps) => {
             <div className='mt-auto flex justify-between item-center'>
                 <p className='text-sm text-gray-400'>{formatTime(task.createdAt)}</p>
                 <p className={`text=sm font-bold ${getPriorityColor(task.priority)}`}>{task.priority}</p>
-                <div className="flex item-center gap-2">
-                    <button className={`${task.completed ? "text-yellow-400" : "text-gray-400"}`}> {star}</button>
-                    <button className='text-[#00A1F1]'>{edit}</button>
-                    <button className='text-red-500'>{trash}</button>
+                <div className="">
+                    <div className='flex items-center gap-3 text-gray-400 text-[1.2rem]'>
+                        <button className={`${task.completed ? "text-yellow-400" : "text-gray-400"}`}> {star}</button>
+                        <button className='text-[#00A1F1]'>{edit}</button>
+                        <button className='text-red-500'>{trash}</button>
+                    </div>
+
                 </div>
             </div>
         </div>

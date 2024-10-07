@@ -25,7 +25,7 @@ export const TasksProvider = ({ children }) => {
             const response = await axios.get(`${serverUrl}/task/get-tasks`);
             // console.log("response,", response)
             setTasks(response.data.tasks);
-        } catch (error) { 
+        } catch (error) {
             console.log(error);
         }
 
@@ -94,6 +94,14 @@ export const TasksProvider = ({ children }) => {
         setLoading(false);
     }
 
+    const handleInput = (name) => (e) => {
+        if (name === "setTask") {
+            setTask(e);
+        } else {
+            setTask({ ...task, [name]: e.target.value });
+        }
+    }
+
     useEffect(() => {
         getTasks();
         console.log("useEffect called")
@@ -111,7 +119,8 @@ export const TasksProvider = ({ children }) => {
             updateTask,
             deleteTask,
             priority,
-            setPriority
+            setPriority,
+            handleInput
         }}>
             {children}
         </TaskContext.Provider>
