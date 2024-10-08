@@ -2,6 +2,7 @@
 import axios from "axios";
 import React, { createContext, useEffect } from "react";
 import { useUserContext } from "./userContext";
+import toast from "react-hot-toast";
 
 const TaskContext = createContext();
 
@@ -12,8 +13,38 @@ export const TasksProvider = ({ children }) => {
     const [loading, setLoading] = React.useState(false);
     const [task, setTask] = React.useState([]);
     const [priority, setPriority] = React.useState("All");
+    const [isEditing, setIsEditing] = React.useState(false);
+    const [activeTask, setActiveTask] = React.useState(null);
+    const [modalMode, setModalMode] = React.useState("");
+    const [profileModal, setProfileModal] = React.useState(false);  // modal for profile
 
-    // const data ='poda cherukka'
+
+    const openModalForAdd = () => {
+        setModalMode("add");
+        setIsEditing(true);
+        setTask({});
+    }
+
+    const openModalForEdit = (task) => {
+        setModalMode("edit");
+        setIsEditing(true);
+        setTask(task);
+        setTask({});
+    }
+
+    const openProfileModal = () => {
+        setProfileModal(true);
+    }
+
+    const closeModal = () => {
+        setIsEditing(false)
+        setProfileModal(false)
+        setModalMode("")
+        setActiveTask(null)
+        setTask({})
+    }
+
+
 
     // user id 
     const userId = useUserContext()?.user?._id;
@@ -23,8 +54,8 @@ export const TasksProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.get(`${serverUrl}/task/get-tasks`);
-            // console.log("response,", response)
-            setTasks(response.data.tasks);
+            // console.log("response,", response.data.tasks);
+            setTasks(response.data);
         } catch (error) {
             console.log(error);
         }
@@ -37,7 +68,7 @@ export const TasksProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.get(`${serverUrl}/task/get-task/${taskId}`);
-            setTask(response.data);
+            setTask(response.data.tasks);
         } catch (error) {
             console.log(error);
         }
@@ -51,6 +82,7 @@ export const TasksProvider = ({ children }) => {
         try {
             const response = await axios.post(`${serverUrl}/task/create-task`, task);
             setTask([...tasks, response.data]);
+            toast.success("Task created successfully");
         } catch (error) {
             console.log(error);
         }
@@ -85,7 +117,7 @@ export const TasksProvider = ({ children }) => {
             await axios.delete(`${serverUrl}/task/delete-task/${taskId}`);
 
             // delete the task from the task array to update the state in realtime
-            const newTasks = tasks.filter((task) => task._id !== taskId);
+            const newTasks = tasks.tasks.filter((task) => task._id !== taskId);
             setTasks(newTasks);
         } catch (error) {
             console.log(error);
@@ -110,7 +142,6 @@ export const TasksProvider = ({ children }) => {
     return (
         <TaskContext.Provider value={{
             tasks,
-            data,
             loading,
             task,
             getTasks,
@@ -120,7 +151,20 @@ export const TasksProvider = ({ children }) => {
             deleteTask,
             priority,
             setPriority,
-            handleInput
+            handleInput,
+            isEditing,
+            setIsEditing,
+            openModalForAdd,
+            openModalForEdit,
+            modalMode,
+            setModalMode,
+            profileModal,
+            setProfileModal,
+            openProfileModal,
+            activeTask,
+            setActiveTask,
+            closeModal
+
         }}>
             {children}
         </TaskContext.Provider>

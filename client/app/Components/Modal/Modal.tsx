@@ -1,15 +1,42 @@
 "use client";
 
 import { useTasks } from '@/context/taskContext';
-import React from 'react'
+import useDetectOutside from '@/hooks/useDetectOutside';
+import React, { useEffect } from 'react'
 
 const Modal = () => {
 
-    const { task, handleInput } = useTasks();
+    const { task, handleInput, createTask, isEditing, closeModal } = useTasks();
+    const ref = React.useRef(null);
+
+
+    useDetectOutside({
+        ref,
+        callback: () => {
+            if (isEditing) {
+                closeModal();
+            }
+        }
+    })
+
+    useEffect(() => {
+
+    }, [])
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        createTask(task);
+    }
 
     return (
-        <div className='fixed flex justify-center items-center left-0 top-0 bottom-0 right-0 z-50 h-full w-full bg-[#333]/30 overflow-hidden'>
-            <form action="" className='py-5 px-6 max-w-[520px] w-full flex flex-col gap-3 bg-white absolute rounded-lg shadow-md '>
+        <div className='fixed flex justify-center items-center left-0 top-0 bottom-0 right-0 z-50 h-full w-full bg-[#333]/30 overflow-hidden' >
+            <form
+                action=""
+                className='py-5 px-6 max-w-[520px] w-full flex flex-col gap-3 bg-white absolute rounded-lg shadow-md '
+                onSubmit={handleSubmit}
+                ref={ref}
+            >
                 <div className='flex flex-col gap-1'>
                     <label htmlFor="">Title</label>
                     <input
