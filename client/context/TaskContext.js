@@ -26,10 +26,11 @@ export const TasksProvider = ({ children }) => {
     }
 
     const openModalForEdit = (task) => {
+        console.log("Editing task:", task);
         setModalMode("edit");
         setIsEditing(true);
-        setTask(task);
-        setTask({});
+        // setTasks(task);
+        setActiveTask(task);
     }
 
     const openProfileModal = () => {
@@ -68,7 +69,7 @@ export const TasksProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.get(`${serverUrl}/task/get-task/${taskId}`);
-            setTask(response.data.tasks);
+            setTask(response.data);
         } catch (error) {
             console.log(error);
         }

@@ -1,12 +1,11 @@
 "use client";
-
 import { useTasks } from '@/context/taskContext';
 import useDetectOutside from '@/hooks/useDetectOutside';
 import React, { useEffect } from 'react'
 
 const Modal = () => {
 
-    const { task, handleInput, createTask, isEditing, closeModal } = useTasks();
+    const { task, handleInput, createTask, isEditing, closeModal, modalMode, activeTask, updateTask } = useTasks();
     const ref = React.useRef(null);
 
 
@@ -20,13 +19,22 @@ const Modal = () => {
     })
 
     useEffect(() => {
-
-    }, [])
+        if (modalMode === "edit" && activeTask) {
+             console.log("Active task for editing:", activeTask); // Log the active task
+            handleInput("setTask")(activeTask);  // Set the active task when editing
+        }
+    }, [modalMode, activeTask]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        createTask(task);
+        if (modalMode === "edit") {
+            updateTask(task);
+        } else if (modalMode === "add") {
+            createTask(task);
+        }
+
+        closeModal();
     }
 
     return (
@@ -102,7 +110,11 @@ const Modal = () => {
                     </div>
                 </div>
                 <div className='mt-8'>
-                    <button type='submit'>Create Task</button>
+                    <button type='submit'
+                        className={`text-white py-2 rounded-md w-full hover:bg-blue-500 transition duration-200 ease-in-out ${modalMode === "edit" ? "bg-blue-400" : "bg-green-600"}`}
+                    >
+                        {modalMode === "edit" ? "Edit Task" : "create Task"}
+                    </button>
                 </div>
             </form>
         </div>
