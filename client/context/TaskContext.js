@@ -10,6 +10,7 @@ const serverUrl = "http://localhost:8000/api/v1";
 export const TasksProvider = ({ children }) => {
 
     const [tasks, setTasks] = React.useState([]);
+    console.log('tasks: ', tasks);
     const [loading, setLoading] = React.useState(false);
     const [task, setTask] = React.useState([]);
     const [priority, setPriority] = React.useState("All");
@@ -66,6 +67,7 @@ export const TasksProvider = ({ children }) => {
 
     // get single task 
     const getTask = async (taskId) => {
+        // console.log('taskId: ', taskId);
         setLoading(true);
         try {
             const response = await axios.get(`${serverUrl}/task/get-task/${taskId}`);
@@ -93,16 +95,36 @@ export const TasksProvider = ({ children }) => {
 
     // update task 
     const updateTask = async (task) => {
+
+        if (!task?.task || !task?.task._id) {
+            console.log('task: ', task.task._id);
+            console.error("Task or Task ID is undefined!");
+            return; // Exit if there's no valid task or task ID
+        }
         setLoading(true);
         try {
-            const response = await axios.put(`${serverUrl}/task/update-task/${task._id}`, task);
+
+            console.log('Task data being sent:', task?.task);
+            const response = await axios.put(`${serverUrl}/task/update-task/${task.task._id}`, task?.task);
+            console.log('API response:', response.data);
+
+
+            // Ensure tasks are defined before updating them
+            if (!tasks?.tasks) {
+                console.error("Tasks array is undefined!");
+                return;
+            }
 
             // update the task in the task array 
-            const updatedTasks = tasks.map((tsk) => {
-                return tsk._id === response.data._id ? response.data : tsk;
+            const updatedTasks = tasks?.tasks?.map((tsk) => {
+                return tsk._id === response.data.task._id ? response.data.task : tsk;
             })
 
+            // Check if updatedTasks are properly constructed
+            console.log('Updated tasks:', updatedTasks);
+
             setTasks(updatedTasks);
+            toast.success("Task updated successfully");
         } catch (error) {
             console.log(error);
         }

@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import TaskModel from "../../models/task/TaskModel.js";
+import mongoose from "mongoose";
 
 
 // create task 
@@ -96,10 +97,12 @@ export const updateTask = asyncHandler(async (req, res) => {
 
         const userId = req.user._id;
         const { id } = req.params;
+        console.log('id: ', id);
         const { title, description, dueDate, priority, status, completed } = req.body;
 
-        if (!id) {
-            return res.status(404).json({ message: "Task id not found" });
+        // Check if id is provided and is a valid ObjectId
+        if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(404).json({ message: "Invalid task ID" });
         }
 
         const task = await TaskModel.findById(id);
