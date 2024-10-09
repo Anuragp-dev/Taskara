@@ -103,8 +103,8 @@ const Modal = () => {
                                 value={task?.completed ? "true" : "false"}
                                 onChange={(e) => handleInput("completed")(e)}
                             >
-                                <option value="true">No</option>
-                                <option value="false">Yes</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
                             </select>
                         </div>
                     </div>

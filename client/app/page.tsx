@@ -19,7 +19,7 @@ export default function Home() {
 
       <div className="pb-[20rem] mt-6 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-[1.5rem]">
         {
-          tasks?.tasks?.map((task: Task, i: number) => (
+          tasks?.map((task: Task, i: number) => (
             <TaskItem key={i} task={task} />
           ))}
         <button className="h-[16rem] w-full py-2 rounded-md text-lg font-medium text-gray-500 border-dashed border-2 border-gray-400

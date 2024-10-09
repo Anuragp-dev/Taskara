@@ -57,7 +57,7 @@ export const TasksProvider = ({ children }) => {
         try {
             const response = await axios.get(`${serverUrl}/task/get-tasks`);
             // console.log("response,", response.data.tasks);
-            setTasks(response.data);
+            setTasks(response.data.tasks);
         } catch (error) {
             console.log(error);
         }
@@ -93,44 +93,70 @@ export const TasksProvider = ({ children }) => {
         setLoading(false);
     }
 
-    // update task 
-    const updateTask = async (task) => {
+    // // update task 
+    // const updateTask = async (task) => {
 
-        if (!task?.task || !task?.task._id) {
-            console.log('task: ', task.task._id);
-            console.error("Task or Task ID is undefined!");
-            return; // Exit if there's no valid task or task ID
+
+    //     if (!task?.task || !task?.task._id) {
+    //         console.log('task: ', task.task._id);
+    //         console.error("Task or Task ID is undefined!");
+    //         return; // Exit if there's no valid task or task ID
+    //     }
+    //     setLoading(true);
+    //     try {
+
+    //         console.log('Task data being sent:', task?.task);
+    //         const response = await axios.put(`${serverUrl}/task/update-task/${task.task._id}`, task?.task);
+    //         console.log('API response:', response.data);
+
+
+    //         // Ensure tasks are defined before updating them
+    //         if (!tasks?.tasks) {
+    //             console.error("Tasks array is undefined!");
+    //             return;
+    //         }
+
+    //         // update the task in the task array 
+    //         const updatedTasks = tasks?.map((tsk) => {
+    //             return tsk._id === response.data._id ? response.data : tsk;
+    //         })
+
+    //         // Check if updatedTasks are properly constructed
+    //         console.log('Updated tasks:', updatedTasks);
+
+    //         setTasks(updatedTasks);
+    //         toast.success("Task updated successfully");
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+
+    //     setLoading(false);
+    // }
+
+    const updateTask = async (task) => {
+        if (!task?._id) {
+            console.error("Task ID is undefined!");
+            return;
         }
         setLoading(true);
         try {
-
-            console.log('Task data being sent:', task?.task);
-            const response = await axios.put(`${serverUrl}/task/update-task/${task.task._id}`, task?.task);
+            console.log('Task data being sent:', task);
+            const response = await axios.put(`${serverUrl}/task/update-task/${task._id}`, task);
             console.log('API response:', response.data);
 
-
-            // Ensure tasks are defined before updating them
-            if (!tasks?.tasks) {
-                console.error("Tasks array is undefined!");
-                return;
-            }
-
-            // update the task in the task array 
-            const updatedTasks = tasks?.tasks?.map((tsk) => {
-                return tsk._id === response.data.task._id ? response.data.task : tsk;
-            })
-
-            // Check if updatedTasks are properly constructed
-            console.log('Updated tasks:', updatedTasks);
+            // Update the task in the tasks array
+            const updatedTasks = tasks?.map((tsk) => {
+                return tsk._id === response.data._id ? response.data : tsk;
+            });
 
             setTasks(updatedTasks);
             toast.success("Task updated successfully");
         } catch (error) {
             console.log(error);
         }
-
         setLoading(false);
-    }
+    };
+
 
 
     // delete task
@@ -151,6 +177,7 @@ export const TasksProvider = ({ children }) => {
 
     const handleInput = (name) => (e) => {
         if (name === "setTask") {
+            console.log('Task being updated:', task)
             setTask(e);
         } else {
             setTask({ ...task, [name]: e.target.value });

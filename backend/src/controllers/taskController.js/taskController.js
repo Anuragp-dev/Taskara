@@ -82,7 +82,7 @@ export const getTask = asyncHandler(async (req, res) => {
             return res.status(401).json({ message: "Unauthorized!" });
         }
 
-        res.status(200).json({ task });
+        res.status(200).json( task );
 
     } catch (error) {
         console.log('get task error: ', error);
@@ -97,7 +97,7 @@ export const updateTask = asyncHandler(async (req, res) => {
 
         const userId = req.user._id;
         const { id } = req.params;
-        console.log('id: ', id);
+        console.log('iddd: ', id);
         const { title, description, dueDate, priority, status, completed } = req.body;
 
         // Check if id is provided and is a valid ObjectId
@@ -127,7 +127,7 @@ export const updateTask = asyncHandler(async (req, res) => {
         // save the task to the database
         await task.save();
 
-        res.status(200).json({ message: "Task updated successfully", task });
+        return res.status(200).json(task);
 
     } catch (error) {
 
