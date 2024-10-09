@@ -26,7 +26,7 @@ export const createTask = asyncHandler(async (req, res) => {
     // Save the task to the database
     await task.save();
 
-    res.status(201).json({ message: "Task created successfully" });
+    res.status(201).json({ data: task, message: "Task created successfully" });
 });
 
 
@@ -82,7 +82,7 @@ export const getTask = asyncHandler(async (req, res) => {
             return res.status(401).json({ message: "Unauthorized!" });
         }
 
-        res.status(200).json( task );
+        res.status(200).json(task);
 
     } catch (error) {
         console.log('get task error: ', error);
@@ -157,7 +157,7 @@ export const deleteTask = asyncHandler(async (req, res) => {
         // delete the task
         await TaskModel.findByIdAndDelete(id);
 
-        res.status(200).json({ message: "Task deleted successfully" });
+        return res.status(200).json({ message: "Task deleted successfully" });
 
     } catch (error) {
 

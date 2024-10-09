@@ -84,7 +84,7 @@ export const TasksProvider = ({ children }) => {
         setLoading(true);
         try {
             const response = await axios.post(`${serverUrl}/task/create-task`, task);
-            setTask([...tasks, response.data]);
+            setTasks([...tasks, response.data?.data]);
             toast.success("Task created successfully");
         } catch (error) {
             console.log(error);
@@ -166,7 +166,7 @@ export const TasksProvider = ({ children }) => {
             await axios.delete(`${serverUrl}/task/delete-task/${taskId}`);
 
             // delete the task from the task array to update the state in realtime
-            const newTasks = tasks.tasks.filter((task) => task._id !== taskId);
+            const newTasks = tasks.filter((tsk) => tsk._id !== taskId);
             setTasks(newTasks);
         } catch (error) {
             console.log(error);
@@ -183,6 +183,14 @@ export const TasksProvider = ({ children }) => {
             setTask({ ...task, [name]: e.target.value });
         }
     }
+
+
+    // get completed tasks
+    const completedTasks = tasks?.filter((task) => task.completed);
+
+    // get pending tasks
+    const activeTasks = tasks?.filter((task) => !task.completed);
+
 
     useEffect(() => {
         getTasks();
@@ -213,7 +221,9 @@ export const TasksProvider = ({ children }) => {
             openProfileModal,
             activeTask,
             setActiveTask,
-            closeModal
+            closeModal,
+            completedTasks,
+            activeTasks
 
         }}>
             {children}

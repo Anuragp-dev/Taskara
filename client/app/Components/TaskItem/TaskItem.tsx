@@ -12,7 +12,7 @@ interface TaskItemProps {
 }
 
 const TaskItem = ({ task }: TaskItemProps) => {
-// console.log('task: ', task);
+    // console.log('task: ', task);
 
     const { getTask, openModalForEdit, deleteTask, modalMode } = useTasks();
 
@@ -51,7 +51,11 @@ const TaskItem = ({ task }: TaskItemProps) => {
                             className='text-[#00A1F1]'>
                             {edit}
                         </button>
-                        <button className='text-red-500'>{trash}</button>
+                        <button className='text-red-500'
+                            onClick={() => deleteTask(task?._id)}
+                        >
+                            {trash}
+                        </button>
                     </div>
 
                 </div>

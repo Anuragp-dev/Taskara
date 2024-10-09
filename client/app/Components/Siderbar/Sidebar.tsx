@@ -1,10 +1,10 @@
-import React from 'react'
-import Profile from '../Profile/Profile'
-import RadioChart from '../RadioChart/RadioChart'
+import React from 'react';
+import Profile from '../Profile/Profile';
+import RadioChart from '../RadioChart/RadioChart';
 
 const Sidebar = () => {
   return (
-    <div className='fixed right-0 top-0 w-[20rem] mt-[5rem] h-[calc(100%-5rem)] flex flex-col bg-[#f9f9f9]'>
+    <div className='fixed right-0 top-0 w-full sm:w-[20rem] mt-[5rem] h-[calc(100vh-5rem)] flex flex-col bg-[#f9f9f9] overflow-y-auto'>
       <Profile />
       <div className='mt-4 mx-6'>
         <RadioChart />
@@ -13,7 +13,7 @@ const Sidebar = () => {
         Sign out
       </button>
     </div>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;

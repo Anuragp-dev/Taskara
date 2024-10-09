@@ -1,4 +1,5 @@
 "use client";
+import { useTasks } from '@/context/taskContext';
 import { useUserContext } from '@/context/userContext';
 import { github, moon, profile } from '@/Utils/Icons';
 import Link from 'next/link';
@@ -7,7 +8,8 @@ import React from 'react'
 
 const Header = () => {
 
-  const { user } = useUserContext()
+  const {  user } = useUserContext()
+  const {activeTasks, OpenModalForAdd,} = useTasks()
   const { name } = user
   const userId = user?._id
   return (
@@ -17,13 +19,13 @@ const Header = () => {
           <span role='img' aria-label='wave'>
             👋
           </span>
-          {userId ? `Welcome, ${name}` : "Welcome to Taskfyer"}
+          {userId ? `Welcome, ${name}` : "Welcome to Taskara"}
         </h1>
         <p className='text-sm'>
           {userId ? (
 
             <>
-              You have <span className="font-bold text-[#3aafae]">5 </span>{""}active tasks
+              You have <span className="font-bold text-[#3aafae]">{activeTasks?.length} </span>{""}active tasks
             </>
           ) : (
             "please login"
@@ -33,6 +35,7 @@ const Header = () => {
       <div className='h-[50px] flex items-center gap-[10.4rem]'>
         <button
           className='px-8 py-3 bg-[#3aafae] text-white rounded-[50px] hover:bg-[#00A1F1] hover:text-white transition-all duration-200 ease-in-out'
+          onClick={OpenModalForAdd}
         >
           Create a new Task
         </button>
