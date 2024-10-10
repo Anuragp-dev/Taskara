@@ -8,8 +8,8 @@ import React from 'react'
 
 const Header = () => {
 
-  const {  user } = useUserContext()
-  const {activeTasks, OpenModalForAdd,} = useTasks()
+  const { user } = useUserContext()
+  const { activeTasks, openModalForAdd } = useTasks()
   const { name } = user
   const userId = user?._id
   return (
@@ -35,7 +35,7 @@ const Header = () => {
       <div className='h-[50px] flex items-center gap-[10.4rem]'>
         <button
           className='px-8 py-3 bg-[#3aafae] text-white rounded-[50px] hover:bg-[#00A1F1] hover:text-white transition-all duration-200 ease-in-out'
-          onClick={OpenModalForAdd}
+          onClick={openModalForAdd}
         >
           Create a new Task
         </button>

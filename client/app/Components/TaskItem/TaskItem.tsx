@@ -3,6 +3,8 @@ import { edit, star, trash } from '@/Utils/Icons';
 import { Task } from '@/Utils/types';
 import { formatTime } from '@/Utils/utilities';
 import React from 'react'
+import { motion } from 'framer-motion'
+import { item } from '@/Utils/animations';
 
 
 
@@ -31,7 +33,9 @@ const TaskItem = ({ task }: TaskItemProps) => {
     }
 
     return (
-        <div className='h-[16rem] px-4 py-3 flex flex-col gap-4 shadow-sm bg-[#f9f9f9] rounded-lg border-2 border-[white]'>
+        <motion.div className='h-[16rem] px-4 py-3 flex flex-col gap-4 shadow-sm bg-[#f9f9f9] rounded-lg border-2 border-[white]'
+        variants={item}
+        >
             <div>
                 <h4 className='font-bold text-2xl'>{task.title}</h4>
                 <p className=''>{task.description}</p>
@@ -60,7 +64,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
 
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

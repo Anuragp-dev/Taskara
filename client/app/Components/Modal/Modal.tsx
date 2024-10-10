@@ -20,7 +20,7 @@ const Modal = () => {
 
     useEffect(() => {
         if (modalMode === "edit" && activeTask) {
-             console.log("Active task for editing:", activeTask); // Log the active task
+            console.log("Active task for editing:", activeTask); // Log the active task
             handleInput("setTask")(activeTask);  // Set the active task when editing
         }
     }, [modalMode, activeTask]);
