@@ -20,7 +20,7 @@ const ProfileModal = () => {
         }
     })
 
-    // profi
+    // profile
 
     const { name, email, Photo } = user;
     return (
