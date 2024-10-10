@@ -20,7 +20,7 @@ const ProfileModal = () => {
         }
     })
 
-    // profile
+    // profile section
 
     const { name, email, Photo } = user;
     return (
