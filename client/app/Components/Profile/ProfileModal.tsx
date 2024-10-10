@@ -20,6 +20,8 @@ const ProfileModal = () => {
         }
     })
 
+    // profi
+
     const { name, email, Photo } = user;
     return (
 
