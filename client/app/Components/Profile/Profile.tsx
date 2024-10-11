@@ -9,19 +9,19 @@ const Profile = () => {
     const { tasks, activeTasks, completedTasks, openProfileModal } = useTasks()
     return (
         <div className='m-6'>
-            <div 
-            className='px-2 py-4 flex items-center gap-3 bg-[#E6E6E6]/20 rounded-[0.8rem] 
+            <div
+                className='px-2 py-4 flex items-center gap-3 bg-[#E6E6E6]/20 rounded-[0.8rem] 
       hover:bg-[#E6E6E6]/50 transition duration-300 ease-in-out cursor-pointer border-2 border-transparent hover:border-2 hover:border-white dark:border-[#F9F9F9]/10'
-      onClick={openProfileModal}
-      >
+                onClick={openProfileModal}
+            >
 
                 <div >
                     <Image
-                        src={user?.Photo}
+                        src="/profile.png"
                         alt="avatar"
                         width={70}
                         height={70}
-                        className="rounded-full"
+                        className="rounded-full shadow-md"
                     />
                 </div>
                 <div className='flex flex-col text-xl'>
