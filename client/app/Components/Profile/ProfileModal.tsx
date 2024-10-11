@@ -28,7 +28,7 @@ const ProfileModal = () => {
     const [newPassword, setNewPassword] = React.useState('');
 
 
-    const handlePassword = (type: string) => () => (e: any) => {
+    const handlePassword = (type: string) => (e: any) => {
         if (type === 'old') {
             setOldPassword(e.target.value)
         } else {
@@ -125,6 +125,38 @@ const ProfileModal = () => {
                                 className='py-[0.4rem] px-3 front-medium rounded-lg border-2 border-[#323232]/10'
                             />
                         </div>
+
+
+                        <div className='flex flex-col gap-1'>
+                            <label htmlFor='oldPassword' className='text-sm font-medium'>
+                                New Password
+                            </label>
+                            <input
+                                type="password"
+                                id='newPassword'
+                                value={newPassword}
+                                onChange={handlePassword("new")}
+                                className='py-[0.4rem] px-3 front-medium rounded-lg border-2 border-[#323232]/10'
+                            />
+                        </div>
+                    </div>
+                    <div className='flex justify-end'>
+                        <button 
+                        type="button"
+                        className='py-3 px-4 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-400 transition-all duration-300'
+                        >
+                            change password
+                        </button>
+                    </div>
+                    <div className='flex justify-end gap-4 border-t-2 border-t-[#323232]/10'>
+                        <button
+                        className='mt-3 py-2 px-4 bg-transparent text-black text-sm font-medium rounded-md border-2 border-[#323232]/10 hover:bg-[#EB4E31] hover:border-transparent hover:text-white transition-all duration-300'>
+                            Cancel
+                        </button>
+                        <button
+                        className='mt-3 py-2 px-4 bg-[#3aafae]  text-white text-sm font-medium rounded-md border-2 border-[#323232]/10 hover:bg-[#2e8d8c]/90 hover:border-transparent hover:text-white transition-all duration-300'>
+                            Save Changes
+                        </button>
                     </div>
                 </form>
             </div>
