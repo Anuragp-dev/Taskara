@@ -387,8 +387,10 @@ export const resetPassword = asyncHandler(async (req, res) => {
 // change password
 export const changePassword = asyncHandler(async (req, res) => {
   const { currentPassword, newPassword } = req.body;
+  console.log(req.body);
 
   if (!currentPassword || !newPassword) {
+    console.log("All fields are required");
     return res.status(400).json({ message: "All fields are required" });
   }
 

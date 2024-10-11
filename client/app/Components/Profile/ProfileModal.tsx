@@ -22,14 +22,14 @@ const ProfileModal = () => {
 
     // profile section
 
-    const { name, email, Photo } = user;
+    const { name, email, photo } = user;
 
     const [oldPassword, setOldPassword] = React.useState('');
     const [newPassword, setNewPassword] = React.useState('');
 
 
     const handlePassword = (type: string) => (e: any) => {
-        if (type === 'old') {
+        if (type === "old") {
             setOldPassword(e.target.value)
         } else {
             setNewPassword(e.target.value)
@@ -48,7 +48,7 @@ const ProfileModal = () => {
                 <div className='mt-4 relative flex justify-between'>
                     <div className='relative inline-block'>
                         <Image
-                            src="/profile.png"
+                            src={photo}
                             alt="avatar"
                             width={80}
                             height={80}
@@ -81,7 +81,7 @@ const ProfileModal = () => {
                     className='mt-4 pt-2 flex flex-col gap-3 border-t-2 border-t-[#323232]/10'
                     onSubmit={(e) => {
                         e.preventDefault()
-                        updateUser(e,{
+                        updateUser(e, {
                             name: userState.name,
                             email: userState.email,
                         })
@@ -136,7 +136,7 @@ const ProfileModal = () => {
 
 
                         <div className='flex flex-col gap-1'>
-                            <label htmlFor='oldPassword' className='text-sm font-medium'>
+                            <label htmlFor='newPassword' className='text-sm font-medium'>
                                 New Password
                             </label>
                             <input
@@ -149,28 +149,35 @@ const ProfileModal = () => {
                         </div>
                     </div>
                     <div className='flex justify-end'>
-                        <button 
-                        type="button"
-                        className='py-3 px-4 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-400 transition-all duration-300'
-                        onClick={() => changePassword({oldPassword, newPassword})}
+                        <button
+                            type="button"
+                            className='py-3 px-4 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-400 transition-all duration-300'
+                            onClick={() => {
+                                changePassword(oldPassword, newPassword);
+                                // Clear both password fields after change
+                                setOldPassword('');
+                                setNewPassword('');
+                            }}
                         >
                             change password
                         </button>
                     </div>
                     <div className='flex justify-end gap-4 border-t-2 border-t-[#323232]/10'>
                         <button
-                        className='mt-3 py-2 px-4 bg-transparent text-black text-sm font-medium rounded-md border-2 border-[#323232]/10 hover:bg-[#EB4E31] hover:border-transparent hover:text-white transition-all duration-300'>
+                            ref={ref}
+                            type='button'
+                            className='mt-3 py-2 px-4 bg-transparent text-black text-sm font-medium rounded-md border-2 border-[#323232]/10 hover:bg-[#EB4E31] hover:border-transparent hover:text-white transition-all duration-300'>
                             Cancel
                         </button>
                         <button
-                        type='submit'
-                        className='mt-3 py-2 px-4 bg-[#3aafae]  text-white text-sm font-medium rounded-md border-2 border-[#323232]/10 hover:bg-[#2e8d8c]/90 hover:border-transparent hover:text-white transition-all duration-300'>
+                            type='submit'
+                            className='mt-3 py-2 px-4 bg-[#3aafae]  text-white text-sm font-medium rounded-md border-2 border-[#323232]/10 hover:bg-[#2e8d8c]/90 hover:border-transparent hover:text-white transition-all duration-300'>
                             Save Changes
                         </button>
                     </div>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
 
     )
 }
