@@ -79,6 +79,14 @@ const ProfileModal = () => {
                 <form
                     action=""
                     className='mt-4 pt-2 flex flex-col gap-3 border-t-2 border-t-[#323232]/10'
+                    onSubmit={(e) => {
+                        e.preventDefault()
+                        updateUser(e,{
+                            name: userState.name,
+                            email: userState.email,
+                        })
+
+                    }}
                 >
                     <div className='pt-2 grid grid-cols-[150px_1fr]'>
                         <label htmlFor='name' className='text-sm font-medium'>
@@ -144,6 +152,7 @@ const ProfileModal = () => {
                         <button 
                         type="button"
                         className='py-3 px-4 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-400 transition-all duration-300'
+                        onClick={() => changePassword({oldPassword, newPassword})}
                         >
                             change password
                         </button>
@@ -154,6 +163,7 @@ const ProfileModal = () => {
                             Cancel
                         </button>
                         <button
+                        type='submit'
                         className='mt-3 py-2 px-4 bg-[#3aafae]  text-white text-sm font-medium rounded-md border-2 border-[#323232]/10 hover:bg-[#2e8d8c]/90 hover:border-transparent hover:text-white transition-all duration-300'>
                             Save Changes
                         </button>
