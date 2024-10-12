@@ -4,7 +4,7 @@ import User from "../../models/auth/UserModel.js";
 export const deleteUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
-  // attempt to find and delete the user
+  // attempt to find and delete the users
   try {
     const user = await User.findByIdAndDelete(id);
     if (!user) {
