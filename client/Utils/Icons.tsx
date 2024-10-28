@@ -1,4 +1,4 @@
-// icon
+// icons
 export const github = <i className="fa-brands fa-github"></i>;
 export const star = <i className="fas fa-star"></i>;
 export const trash = <i className="fas fa-trash"></i>;
