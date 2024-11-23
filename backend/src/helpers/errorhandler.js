@@ -4,7 +4,7 @@ const errorHandler = (err, req, res, next) => {
   if (res.headersSent) {
     // if true, pass the error to the next error-handling middleware
     return next(err);
-  }
+  } 
 
   // set the status code of the response
   const statusCode =
