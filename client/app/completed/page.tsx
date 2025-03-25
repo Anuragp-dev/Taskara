@@ -7,7 +7,7 @@ import Filters from "../Components/filters/Filters";
 import TaskItem from "../Components/TaskItem/TaskItem";
 import { useEffect } from "react";
 import { motion } from "framer-motion"
-import { container, item } from "@/Utils/animations";
+import { container, item } from "@/Utils/animations"; 
 
 export default function Home() {
   useRedirect("/login");
