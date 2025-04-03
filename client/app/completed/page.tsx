@@ -16,7 +16,7 @@ export default function Home() {
   const filtered = filteredTasks(completedTasks, priority);
 
 
-  useEffect(() => {
+  useEffect(() => { 
     setPriority("All");
   }, []);
   // console.log('tasks: ', tasks);
